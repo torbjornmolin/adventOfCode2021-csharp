@@ -47,10 +47,20 @@
         private static string GetInput(string action, string day)
         {
             // we assume input is in current working directory, named [day].txt or [day]_test.txt
+            if (day.Contains("_part1"))
+            {
+                day = day.Replace("_part1", "");
+            }
+            if (day.Contains("_part2"))
+            {
+                day = day.Replace("_part2", "");
+            }
             if (action == "test")
                 return File.ReadAllText($"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{day}_test.txt");
             else
+            {
                 return File.ReadAllText($"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{day}.txt");
+            }
 
         }
     }
