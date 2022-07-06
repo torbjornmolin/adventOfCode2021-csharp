@@ -7,12 +7,9 @@ namespace adventofcode2021
             return CountIncrements(input);
         }
 
-        public bool Test(string input)
+        public void Test(string input)
         {
-            var result = CountIncrements(input) == 7;
-            if (result)
-                System.Console.WriteLine("Result was 7");
-            return result;
+            Assert.AreEqual(CountIncrements(input), 7);
         }
 
         private int CountIncrements(string input)
