@@ -27,6 +27,12 @@
                 case "day2_part2":
                     selectedDay = new Day2_Part2();
                     break;
+                case "day3_part1":
+                    selectedDay = new Day3_Part1();
+                    break;
+                case "day3_part2":
+                    selectedDay = new Day3_Part2();
+                    break;
                 default:
                     System.Console.WriteLine($"Unknown day: {day}");
                     return;
