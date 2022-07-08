@@ -23,6 +23,7 @@ namespace adventofcode2021
             Assert.AreEqual((int)(new BingoBoard(hasWonBoard).GetState()), (int)BoardState.HasWon, "Winning board row");
             Assert.AreEqual((int)(new BingoBoard(columnWonBoard).GetState()), (int)BoardState.HasWon, "Winning board col");
 
+            Assert.AreEqual(new BingoBoard(columnWonBoard).SumOfUnmarked(), 184, "Sum of unmarked numbers is correct.");
             Assert.AreEqual(Parse(input).BingoBoards.First().GetNumer(4, 4), 19, "Last number in first test board is 19");
 
             Assert.AreEqual(PlayGame(input), 4512);
@@ -55,23 +56,33 @@ namespace adventofcode2021
         }
         private int PlayGame(string input)
         {
-            throw new NotImplementedException();
             var game = Parse(input);
-
+            foreach (var n in game.Numbers)
+            {
+                foreach (var board in game.BingoBoards)
+                {
+                    board.Play(n);
+                    if (board.GetState() == BoardState.HasWon)
+                    {
+                        return n * board.SumOfUnmarked();
+                    }
+                }
+            }
+            return 0;
         }
 
         class BingoGame
         {
-            private readonly int[] numbers;
 
             public BingoGame(int[] numbers, BingoBoard[] bingoBoards)
             {
-                this.numbers = numbers;
+                this.Numbers = numbers;
                 BingoBoards = bingoBoards;
             }
 
 
             public BingoBoard[] BingoBoards { get; }
+            public int[] Numbers { get; }
         }
 
 
@@ -91,7 +102,10 @@ namespace adventofcode2021
             {
                 return numbers[row][column];
             }
-
+            internal int SumOfUnmarked()
+            {
+                return numbers.Sum(row => row.Sum(n => n >= 0 ? n : 0));
+            }
             internal BoardState GetState()
             {
                 // Check rows.
@@ -113,12 +127,31 @@ namespace adventofcode2021
                     && numbers[4][i] < 0
                     )
                     {
-
                         return BoardState.HasWon;
                     }
 
                 }
                 return BoardState.NewBoard;
+            }
+
+            internal void Play(int n)
+            {
+                for (int row = 0; row < numbers[row].Length; row++)
+                {
+                    for (int col = 0; col < numbers[row].Length; col++)
+                    {
+                        if (numbers[row][col] == n)
+                        {
+                            if (numbers[row][col] == 0)
+                            {
+                                numbers[row][col] = int.MinValue;
+                            }
+                            else
+                                numbers[row][col] = -n;
+                            return;
+                        }
+                    }
+                }
             }
         }
 
