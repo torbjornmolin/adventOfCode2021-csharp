@@ -136,7 +136,7 @@ namespace adventofcode2021
 
             internal void Play(int n)
             {
-                for (int row = 0; row < numbers[row].Length; row++)
+                for (int row = 0; row < numbers.Length; row++)
                 {
                     for (int col = 0; col < numbers[row].Length; col++)
                     {
