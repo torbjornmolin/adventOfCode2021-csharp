@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             "program": "${workspaceFolder}/bin/Debug/net6.0/adventOfCode2021-csharp.dll",
-            "args": ["test", "day3_part1"],
+            "args": ["test", "day4_part1"],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
             "stopAtEntry": false
