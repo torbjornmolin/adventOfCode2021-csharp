@@ -2,7 +2,7 @@ namespace adventofcode2021
 {
     public class Day1_Part1 : IDay
     {
-        public int Run(string input)
+        public decimal Run(string input)
         {
             return CountIncrements(input);
         }

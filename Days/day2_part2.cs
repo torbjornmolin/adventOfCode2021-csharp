@@ -2,7 +2,7 @@ namespace adventofcode2021
 {
     public class Day2_Part2 : IDay
     {
-        public int Run(string input)
+        public decimal Run(string input)
         {
             return GetResult(input);
         }

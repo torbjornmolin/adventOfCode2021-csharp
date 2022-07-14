@@ -3,7 +3,7 @@ namespace adventofcode2021
 {
     public class Day5_Part2 : IDay
     {
-        public int Run(string input)
+        public decimal Run(string input)
         {
             return CountOverlaps(input);
         }
