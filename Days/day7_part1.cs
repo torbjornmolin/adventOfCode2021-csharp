@@ -32,6 +32,7 @@ namespace adventofcode2021
             return minimumFuel;
         }
 
+
         private IEnumerable<int> Parse(string input)
         {
             return input.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s));

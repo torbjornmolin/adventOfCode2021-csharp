@@ -4,12 +4,13 @@ namespace adventofcode2021
     {
         public decimal Run(string input)
         {
-            throw new NotImplementedException();
+            return FindCheapestAlignmentPoint(Parse(input));
         }
 
         public void Test(string input)
         {
-            Assert.AreEqual(FindCheapestAlignmentPoint(Parse(input)), 37, "Correct minimum fuel consumption found");
+            Assert.AreEqual(GetFuelCost(3), 6);
+            Assert.AreEqual(FindCheapestAlignmentPoint(Parse(input)), 168, "Correct minimum fuel consumption found");
         }
 
         private int FindCheapestAlignmentPoint(IEnumerable<int> input)
@@ -23,8 +24,8 @@ namespace adventofcode2021
                 var fuelConsumption = input.Sum(v =>
                 {
                     if (v > possiblePosition)
-                        return v - possiblePosition;
-                    return possiblePosition - v;
+                        return GetFuelCost(v - possiblePosition);
+                    return GetFuelCost(possiblePosition - v);
                 });
                 if (fuelConsumption < minimumFuel)
                     minimumFuel = fuelConsumption;
@@ -32,6 +33,16 @@ namespace adventofcode2021
             return minimumFuel;
         }
 
+        private int GetFuelCost(int steps)
+        {
+            // S = n(a + l)/2
+            // a = first term = 1
+            // l = last term = steps
+            // n = numer of integers = steps
+            // S = steps * ( 1 + steps) / 2
+
+            return (steps * (1 + steps)) / 2;
+        }
         private IEnumerable<int> Parse(string input)
         {
             return input.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(s => int.Parse(s));
