@@ -75,6 +75,9 @@
                 case "day10_part2":
                     selectedDay = new Day10_Part2();
                     break;
+                case "day11_part1":
+                    selectedDay = new Day11_Part1();
+                    break;
 
                 default:
                     System.Console.WriteLine($"Unknown day: {day}");
@@ -83,21 +86,20 @@
             switch (action)
             {
                 case "test":
-                    {
-                        string testInput = GetInput(action, day);
-                        selectedDay.Test(testInput);
-                        break;
-                    }
+                {
+                    string testInput = GetInput(action, day);
+                    selectedDay.Test(testInput);
+                    break;
+                }
                 case "run":
-                    {
-                        var result = selectedDay.Run(GetInput(action, day));
-                        System.Console.WriteLine($"Result was {result}");
-                        break;
-                    }
+                {
+                    var result = selectedDay.Run(GetInput(action, day));
+                    System.Console.WriteLine($"Result was {result}");
+                    break;
+                }
                 default:
                     System.Console.WriteLine($"Unknown action: {action}");
                     break;
-
             }
         }
 
@@ -113,12 +115,15 @@
                 day = day.Replace("_part2", "");
             }
             if (action == "test")
-                return File.ReadAllText($"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{day}_test.txt");
+                return File.ReadAllText(
+                    $"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{day}_test.txt"
+                );
             else
             {
-                return File.ReadAllText($"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{day}.txt");
+                return File.ReadAllText(
+                    $"{Directory.GetCurrentDirectory()}{Path.DirectorySeparatorChar}{day}.txt"
+                );
             }
-
         }
     }
 }
